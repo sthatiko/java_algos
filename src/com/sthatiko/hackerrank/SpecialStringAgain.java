@@ -3,33 +3,57 @@ package com.sthatiko.hackerrank;
 // https://www.hackerrank.com/challenges/special-palindrome-again/problem
 // bruteforce TLE
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+
 public class SpecialStringAgain {
 
-    private static Boolean isSpecial(String s){
-        int n = s.length() ;
-        if(n==1) return true;
-        for(int i=0,j=n-1;i<j;i++,j--){
-            if(s.charAt(i) != s.charAt(j)){
-                return false ;
-            }
-            else{
-                if(i!=0 && s.charAt(i) != s.charAt(i-1)) return false;
-            }
+    private static class Tuple{
+        Character chr;
+        Integer count;
+
+        private Tuple(Character chr, Integer count){
+            this.chr = chr;
+            this.count = count;
         }
-        return true;
     }
 
     private static long substrCount(int n, String s) {
-        int result = n;
-        for(int size=2;size<=n;size++){
-            for(int i=0;i<=n-size;i++){
-                if(isSpecial(s.substring(i,i+size))) result++;
+        int result = 0;
+        ArrayList<Tuple> counts = new ArrayList<>();
+        char prev = ' ' ;
+        int count = 0;
+        // first pass: get all consecutively same letters and their count
+        for(int i=0;i<n;i++){
+            char c = s.charAt(i);
+            if(c == prev){
+                count++ ;
+            }else{
+                if(prev != ' '){
+                    counts.add(new Tuple(prev,count));
+                }
+                count = 1;
+                prev = c ;
+            }
+        }
+        counts.add(new Tuple(prev,count));
+        // get count of all special substring formed by those consecutive same letters "aaaa" , lenght = 4, res = 4*(4+1)/2 = 10
+        for(Tuple t :counts){
+            result += (t.count*(t.count+1))/2;
+        }
+        //calculate results for 2nd case like aaaabaaaa
+        int g = counts.size();
+        for(int i=1;i<g-1;i++){
+            if(counts.get(i-1).chr == counts.get(i+1).chr && counts.get(i).count ==1){
+                result += Math.min(counts.get(i-1).count,counts.get(i+1).count);
             }
         }
         return result;
     }
 
     public static void main(String[] args) {
-	    System.out.println(substrCount(7,"abcbaba"));
+        String tc = "asasd";
+	    System.out.println(substrCount(tc.length(),tc));
     }
 }
