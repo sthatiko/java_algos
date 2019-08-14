@@ -1,6 +1,6 @@
 package com.sthatiko.hackerrank;
 
-//https://orareview.us.oracle.com/79782800
+//https://www.hackerrank.com/challenges/anagram/problem
 
 public class Anagram {
     public static void main(String[] args) {
