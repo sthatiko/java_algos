@@ -12,6 +12,7 @@ public class ReverseBits {
             res = res << 1;
             res = res | end;
         }
+
         return res;
     }
 
