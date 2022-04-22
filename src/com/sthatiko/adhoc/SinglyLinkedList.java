@@ -1,11 +1,11 @@
 package com.sthatiko.adhoc;
 
+import java.util.Objects;
 public class SinglyLinkedList<T> {
     //Node inner class for SLL
     public class Node {
         public T data;
         public Node nextNode;
-
     }
 
     //head node of the linked list
@@ -16,6 +16,7 @@ public class SinglyLinkedList<T> {
     public SinglyLinkedList() {
         headNode = null;
         size = 0;
+        Objects.requireNonNull("");
     }
 
     public boolean isEmpty() {

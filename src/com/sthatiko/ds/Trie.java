@@ -1,6 +1,23 @@
 package com.sthatiko.ds;
 
+import sun.lwawt.macosx.CSystemTray;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
 // Also known as prefix tree
 class Trie {
 
@@ -15,6 +32,7 @@ class Trie {
     /** Initialize your data structure here. */
     public Trie() {
         root = new TrieNode();
+        System.out.println(this.getClass().getSimpleName());
     }
 
     /** Inserts a word into the trie. */
